@@ -18,26 +18,10 @@ public class GameTest {
 
     @BeforeEach
     public void setup() {
-        manager.registered(player1);
-        manager.registered(player3);
-        manager.registered(player4);
-        manager.registered(player5);
-    }
-
-    @Test
-    public void shouldFindRegisteredPlayerId() {
-        int expected = 3;
-        int actual = manager.findById("Кратос");
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldNotFindUnregisteredPlayerId() {
-        int expected = -1;
-        int actual = manager.findById("Разрушитель3000");
-
-        Assertions.assertEquals(expected, actual);
+        manager.registered("МощныеШтаны", player1);
+        manager.registered("Агент00Победа", player3);
+        manager.registered("Старожил", player4);
+        manager.registered("Кратос", player5);
     }
 
     @Test
@@ -54,7 +38,6 @@ public class GameTest {
         int actual = manager.round("МощныеШтаны", "Старожил");
 
         Assertions.assertEquals(expected, actual);
-
     }
 
     @Test

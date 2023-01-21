@@ -11,10 +11,6 @@ public class Player {
         this.strength = strength;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getStrength() {
         return strength;
     }
