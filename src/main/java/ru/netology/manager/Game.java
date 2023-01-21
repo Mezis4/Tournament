@@ -3,40 +3,30 @@ package ru.netology.manager;
 import ru.netology.data.Player;
 import ru.netology.exception.NotRegisteredException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Game {
-    private List<Player> players = new ArrayList<>();
+    private HashMap<String, Player> players = new HashMap();
 
-    public boolean registered(Player player) {
-        return players.add(player);
+    public void registered(String name, Player player) {
+        players.put(name, player);
     }
 
     public int round(String playerName1, String playerName2) {
-        int idPlayerOne = findById(playerName1);
-        int idPlayerTwo = findById(playerName2);
-        if (idPlayerOne == -1) {
+        Player PlayerOne = players.get(playerName1);
+        Player PlayerTwo = players.get(playerName2);
+        if (PlayerOne == null) {
             throw new NotRegisteredException("Для участия в турнире игрок должен быть зарегестрирован");
         }
-        if (idPlayerTwo == -1) {
+        if (PlayerTwo == null) {
             throw new NotRegisteredException("Для участия в турнире игрок должен быть зарегестрирован");
         }
-        if (players.get(idPlayerOne).getStrength() > players.get(idPlayerTwo).getStrength()) {
+        if (PlayerOne.getStrength() > PlayerTwo.getStrength()) {
             return 1;
-        } else if (players.get(idPlayerOne).getStrength() < players.get(idPlayerTwo).getStrength()) {
+        } else if (PlayerOne.getStrength() < PlayerTwo.getStrength()) {
             return 2;
         } else {
             return 0;
         }
-    }
-
-    public int findById(String playerNick) {
-        for (Player player : players) {
-            if (player.getName().equalsIgnoreCase(playerNick)) {
-                return players.indexOf(player);
-            }
-        }
-        return -1;
     }
 }
